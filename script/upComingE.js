@@ -1,16 +1,14 @@
 const upcomingE = document.getElementById("upcomingE");
 
-
 const DateBase = new Date(data.currentDate); 
 
-let tarjetasCargadas = crearTarjetas(data.events);
+let tarjeta = "";
 
-function crearTarjetas(lista) {
-  let tarjeta = "";
+let tarjetasUpcomingE = data.events.filter((eventos) => new Date(eventos.date) >= DateBase);
 
-  for (let eventos of lista) {
-    if (new Date(eventos.date) >= DateBase) {
-      tarjeta += `
+    tarjetasUpcomingE.forEach((eventos) => (tarjetasCargadas += 
+    
+    `
       <div class="card event__card p-2 m-4 border-0 text-center">
       <div class="row no-gutters">
         <div class="col-sm-4" style="margin-left: 90px">
@@ -23,10 +21,6 @@ function crearTarjetas(lista) {
           </div>
         </div>
       </div>
-    </div> `
-    }
-  }
-  return tarjeta;
-}
+    </div> `))
 
 upcomingE.innerHTML = tarjetasCargadas;

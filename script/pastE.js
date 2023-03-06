@@ -2,13 +2,12 @@ const pastE = document.getElementById("pastE");
 
 const DateBase = new Date(data.currentDate); 
 
-let tarjetasCargadas = crearTarjetas(data.events); 
-function crearTarjetas(lista) {
-  let tarjeta = "";
+let tarjetasCargadas = "";
 
-  for (let eventos of lista) {
-    if (new Date(eventos.date) < DateBase) {
-      tarjeta += `
+let tarjetasPastE = data.events.filter((eventos) => new Date(eventos.date) < DateBase);
+
+      tarjetasPastE.forEach((eventos) => (tarjetasCargadas +=
+        `
       <div class="card event__card p-2 m-4 border-0 text-center">
       <div class="row no-gutters">
         <div class="col-sm-4" style="margin-left: 90px">
@@ -21,10 +20,6 @@ function crearTarjetas(lista) {
           </div>
         </div>
       </div>
-    </div> `
-    }
-  }
-  return tarjeta;
-}
+    </div> `) )
 
 pastE.innerHTML = tarjetasCargadas;
