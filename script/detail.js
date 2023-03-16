@@ -1,22 +1,9 @@
-function getData(){
-    var idCard = 1
-    data.events.map(evento => evento.id = idCard++)
-
-    var id = location.search.split("?id=").filter(Number)
-
-    var selectID = Number(id[0])
-    console.log(selectID)
-
-    var evento = data.events.find((evento) => {
-        return evento.id == selectID
-    })
-
-var templateHTML = `
-<div class="card event__card border-0 text-center">
-    <div class="col">
+function crearTarjeta(evento) {
+    return`<div class="card border-0 align-items-center">
+    <div class="col" style="height: 300px; width: 600px;">
         <div class="card" style="margin-left: 90px">
-            <img class="card-img rounded" src=" ${evento.image} "width="100" height="200">
-            <div class="card-body d-flex flex-column">
+            <img class="card-img rounded" src=" ${evento.image} "width="100" height="250">
+            <div class="card-body d-flex flex-column text-center">
                     <h5 class="card-title">${evento.name}</h5>
                     <p class="card-text">${evento.description}</p>
                     <p class="card-text">${evento.date}</p>
@@ -31,8 +18,10 @@ var templateHTML = `
         </div>
     </div>
 </div>`
-
-
-document.getElementById('tarjetasDetail').innerHTML= templateHTML
 }
-getData ()
+
+let params = new URLSearchParams(document.location.search)
+let id = params.get('id')
+let event = data.events.filter(info => info._id == id);
+let detail = document.getElementById('detail');
+detail.innerHTML = crearTarjeta(evento[0])
